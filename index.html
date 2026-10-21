@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC - Mini Sistema</title>
+    <!-- Importação de fontes e ícones -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Arquivo de Estilo CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="container">
+        <header class="app-header">
+            <div class="icon-badge">
+                <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+            <h1>Calculadora de IMC</h1>
+            <p>Descubra seu Índice de Massa Corporal e acompanhe sua saúde</p>
+        </header>
+
+        <!-- Formulário do IMC -->
+        <form id="imcForm" onsubmit="return false;">
+            
+            <!-- Campo de Peso -->
+            <div class="input-group">
+                <label for="peso">
+                    <i class="fa-solid fa-weight-scale"></i> Peso (kg)
+                </label>
+                <div class="input-wrapper">
+                    <input type="number" id="peso" step="0.1" min="0.1" placeholder="Ex: 70.5" required autocomplete="off">
+                    <span class="unit">kg</span>
+                </div>
+            </div>
+
+            <!-- Campo de Altura -->
+            <div class="input-group">
+                <label for="altura">
+                    <i class="fa-solid fa-ruler-vertical"></i> Altura (m)
+                </label>
+                <div class="input-wrapper">
+                    <input type="number" id="altura" step="0.01" min="0.1" max="3" placeholder="Ex: 1.75" required autocomplete="off">
+                    <span class="unit">m</span>
+                </div>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="button-group">
+                <button type="button" id="btnCalcular" onclick="calcularIMC()">
+                    <i class="fa-solid fa-calculator"></i> Calcular IMC
+                </button>
+                <button type="button" id="btnLimpar" class="btn-secondary" onclick="limparCampos()" title="Limpar formulário">
+                    <i class="fa-solid fa-rotate-left"></i>
+                </button>
+            </div>
+        </form>
+
+        <!-- Área de Mensagem de Erro -->
+        <div id="mensagemErro" class="error-box hidden">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span id="textoErro">Preencha todos os campos corretamente!</span>
+        </div>
+
+        <!-- Área de Exibição do Resultado -->
+        <section id="resultadoArea" class="result-card hidden">
+            <div class="result-header">
+                <span class="result-title">Seu IMC Atual</span>
+                <div id="statusBadge" class="status-badge">
+                    <i id="statusIcon" class="fa-solid fa-circle-info"></i>
+                    <span id="statusTexto">Classificação</span>
+                </div>
+            </div>
+
+            <div class="imc-number-container">
+                <span id="imcValor">00.0</span>
+                <span class="imc-unit">kg/m²</span>
+            </div>
+
+            <p id="imcDescricao" class="imc-description">Sua faixa de peso será analisada de acordo com as diretrizes da Organização Mundial da Saúde (OMS).</p>
+
+            <!-- Barra Visual das Faixas da OMS -->
+            <div class="scale-bar">
+                <div class="scale-item baixo" title="Abaixo de 18.5: Abaixo do peso"></div>
+                <div class="scale-item normal" title="18.5 - 24.9: Peso Normal"></div>
+                <div class="scale-item sobrepeso" title="25.0 - 29.9: Sobrepeso"></div>
+                <div class="scale-item obesidade" title="30.0 ou mais: Obesidade"></div>
+            </div>
+            <div class="scale-labels">
+                <span>18.5</span>
+                <span>25.0</span>
+                <span>30.0</span>
+            </div>
+        </section>
+
+        <!-- Tabela de Referência da OMS -->
+        <details class="reference-table">
+            <summary><i class="fa-solid fa-table-list"></i> Tabela de Referência (OMS)</summary>
+            <ul>
+                <li><span>Abaixo do peso</span> <strong>&lt; 18.5</strong></li>
+                <li><span>Peso normal</span> <strong>18.5 – 24.9</strong></li>
+                <li><span>Sobrepeso</span> <strong>25.0 – 29.9</strong></li>
+                <li><span>Obesidade</span> <strong>≥ 30.0</strong></li>
+            </ul>
+        </details>
+
+        <!-- Rodapé Obrigatório -->
+        <footer>
+            <i class="fa-solid fa-code"></i> Desenvolvido por: <strong id="nomeAluno">miguel kaleb</strong>
+        </footer>
+    </main>
+
+    <!-- Arquivo de Lógica JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
